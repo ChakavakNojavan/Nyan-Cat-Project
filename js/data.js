@@ -17,10 +17,3 @@ const MAX_ENEMIES = 3;
 // These constants represent the player width and height.
 const PLAYER_WIDTH = 75;
 const PLAYER_HEIGHT = 77;
-
-const playButton = document.querySelector("#playButton");
-const audio = document.querySelector("#myAudio");
-
-playButton.addEventListener("click", function () {
-  audio.play();
-});

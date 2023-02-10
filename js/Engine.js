@@ -7,6 +7,7 @@ class Engine {
     this.music = new Audio();
     this.music.src = "https://www.nyan.cat/music/vday.mp3";
     this.music.loop = true;
+    this.lives = 3;
   }
 
   gameLoop() {
@@ -31,8 +32,17 @@ class Engine {
     }
 
     if (this.isPlayerDead()) {
-      window.alert("Game over");
-      return;
+      this.lives--;
+      if (this.lives === 2) {
+        window.alert("2 more lives left!");
+      }
+      if (this.lives === 1) {
+        window.alert("Only 1 life left!");
+      }
+      if (this.lives === 0) {
+        window.alert("GAME OVER");
+        location.reload();
+      }
     }
     this.music.play();
     setTimeout(() => this.gameLoop(), 20);
@@ -42,11 +52,15 @@ class Engine {
     document.getElementById("start-button").addEventListener("click", () => {
       const keydownHandler = (event) => {
         if (event.code === "ArrowLeft") {
-          this.player.moveLeft();
+          if (!this.player.moving) {
+            this.player.moveLeft();
+          }
         }
 
         if (event.code === "ArrowRight") {
-          this.player.moveRight();
+          if (!this.player.moving) {
+            this.player.moveRight();
+          }
         }
       };
 
